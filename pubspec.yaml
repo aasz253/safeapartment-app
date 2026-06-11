@@ -28,10 +28,8 @@ dependencies:
   sensors_plus: ^4.0.1
   tflite_flutter: ^0.10.4
   flutter_local_notifications: ^16.3.0
-  onesignal_flutter: ^5.1.0
   flutter_webrtc: ^0.9.46
   webrtc_interface: ^1.1.0
-  purchases_flutter: ^6.10.0
   permission_handler: ^11.0.1
   device_info_plus: ^9.1.0
   connectivity_plus: ^5.0.1

@@ -6,11 +6,8 @@ class AppConstants {
   static const String supabaseUrl = 'https://owmlbpposyjujyblyyrt.supabase.co';
   static const String supabaseAnonKey = 'sb_publishable_JNUkPNTaBzd5p53uYvNYlg_gDS1pcv4';
 
-  // OneSignal
-  static const String oneSignalAppId = 'YOUR_ONESIGNAL_APP_ID';
-
-  // RevenueCat
-  static const String revenueCatApiKey = 'YOUR_REVENUECAT_API_KEY';
+  // RevenueCat (replaced with Supabase-based subscription)
+  // static const String revenueCatApiKey = '';
 
   // Pricing
   static const double premiumMonthlyPrice = 3.0;
