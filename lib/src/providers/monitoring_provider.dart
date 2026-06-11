@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:camera/camera.dart';
 import '../models/alert.dart';
 import '../services/camera_service.dart';
 import '../services/audio_service.dart';
@@ -38,6 +39,18 @@ class MonitoringNotifier extends StateNotifier<MonitoringState> {
     _cameraService = cameraSvc;
     _audioService = audioSvc;
     _sensorService = sensorSvc;
+
+    // Ensure camera is initialized
+    if (cameraSvc.controller == null || !cameraSvc.controller!.value.isInitialized) {
+      final cameras = await availableCameras();
+      if (cameras.isNotEmpty) {
+        final camera = cameras.firstWhere(
+          (c) => c.lensDirection == CameraLensDirection.back,
+          orElse: () => cameras.first,
+        );
+        await cameraSvc.initializeCamera(camera);
+      }
+    }
 
     // Start motion detection (free tier)
     await cameraSvc.startMotionDetection(

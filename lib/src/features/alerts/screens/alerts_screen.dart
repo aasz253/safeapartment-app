@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../providers/alert_provider.dart';
+import '../../../providers/auth_provider.dart';
 import '../../../models/alert.dart';
 import '../../../core/theme.dart';
 
-class AlertsScreen extends ConsumerWidget {
+class AlertsScreen extends ConsumerStatefulWidget {
   const AlertsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AlertsScreen> createState() => _AlertsScreenState();
+}
+
+class _AlertsScreenState extends ConsumerState<AlertsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final user = ref.read(currentUserProvider);
+      if (user != null) {
+        ref.read(alertProvider.notifier).loadAlerts(user.id);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final alerts = ref.watch(alertProvider);
 
     return Scaffold(
@@ -18,7 +35,9 @@ class AlertsScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.checklist),
             onPressed: () {
-              // Mark all as viewed
+              for (final a in alerts) {
+                ref.read(alertProvider.notifier).markViewed(a.id);
+              }
             },
           ),
         ],
@@ -79,7 +98,7 @@ class _AlertCard extends ConsumerWidget {
       child: InkWell(
         onTap: () {
           ref.read(alertProvider.notifier).markViewed(alert.id);
-          _showAlertDetail(context, alert);
+          _showAlertDetail(context, ref, alert);
         },
         borderRadius: BorderRadius.circular(16),
         child: Padding(
@@ -210,7 +229,7 @@ class _AlertCard extends ConsumerWidget {
     return '${dt.day}/${dt.month}/${dt.year}';
   }
 
-  void _showAlertDetail(BuildContext context, Alert alert) {
+  void _showAlertDetail(BuildContext context, WidgetRef ref, Alert alert) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(

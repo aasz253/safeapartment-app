@@ -181,12 +181,28 @@ CREATE POLICY "Users can read own alerts" ON alerts
 FCM delivers push notifications between paired devices — free, no payment required.
 
 1. Go to [console.firebase.google.com](https://console.firebase.google.com)
-2. Create a project (or use your existing Google project)
-3. Register an Android app with package name `com.safeapartment.app`
-4. Download `google-services.json` and place in `android/app/`
-5. Register an iOS app with bundle ID `com.safeapartment.app`
-6. Download `GoogleService-Info.plist` and place in `ios/Runner/`
-7. Enable **Cloud Messaging** API in the Firebase console
+2. Create a project (or use existing)
+3. Register **Android app** with package name `com.safeapartment.app`
+4. Download `google-services.json` → place in `android/app/`
+5. Register **iOS app** with bundle ID `com.safeapartment.app`
+6. Download `GoogleService-Info.plist` → place in `ios/Runner/`
+7. In Project Settings → General, find your **API Key**, **App ID**, **Sender ID**, **Project ID**
+8. Open `lib/firebase_options.dart` and replace the placeholder values:
+
+```dart
+static const FirebaseOptions android = FirebaseOptions(
+  apiKey: 'YOUR_API_KEY',          // ← Firebase Web API Key
+  appId: 'YOUR_APP_ID',            // ← Firebase Android App ID (1:xxx:android:yyy)
+  messagingSenderId: 'YOUR_SENDER_ID', // ← Project number
+  projectId: 'safeapartment-12345',    // ← Your project ID
+);
+```
+
+**Quick alternative:** Run `flutterfire configure` (from the `flutterfire_cli` package) and it auto-generates `firebase_options.dart` for you:
+```bash
+dart pub global activate flutterfire_cli
+flutterfire configure
+```
 
 ### 4. Set API Keys
 
@@ -196,18 +212,6 @@ The Supabase URL and anon key are already configured in `lib/src/core/constants.
 // lib/src/core/constants.dart
 static const String supabaseUrl = 'https://YOUR-PROJECT.supabase.co';
 static const String supabaseAnonKey = 'your-anon-key';
-```
-
-**For Android:** Add this classpath to `android/build.gradle`:
-```gradle
-dependencies {
-    classpath 'com.google.gms:google-services:4.4.0'
-}
-```
-
-Then add the plugin to `android/app/build.gradle`:
-```gradle
-apply plugin: 'com.google.gms.google-services'
 ```
 
 ### 5. Run

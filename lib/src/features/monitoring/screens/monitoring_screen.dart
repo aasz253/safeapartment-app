@@ -5,6 +5,7 @@ import '../../../providers/subscription_provider.dart';
 import '../../../core/theme.dart';
 import '../../../services/camera_service.dart';
 import '../../subscription/screens/paywall_screen.dart';
+import 'package:camera/camera.dart';
 
 class MonitoringScreen extends ConsumerStatefulWidget {
   const MonitoringScreen({super.key});
@@ -14,6 +15,22 @@ class MonitoringScreen extends ConsumerStatefulWidget {
 }
 
 class _MonitoringScreenState extends ConsumerState<MonitoringScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _initCamera();
+  }
+
+  Future<void> _initCamera() async {
+    final cameras = await availableCameras();
+    if (cameras.isEmpty) return;
+    final camera = cameras.firstWhere(
+      (c) => c.lensDirection == CameraLensDirection.back,
+      orElse: () => cameras.first,
+    );
+    ref.read(cameraServiceProvider).initializeCamera(camera);
+  }
+
   @override
   Widget build(BuildContext context) {
     final monitoringState = ref.watch(monitoringProvider);
@@ -33,13 +50,10 @@ class _MonitoringScreenState extends ConsumerState<MonitoringScreen> {
       ),
       body: Stack(
         children: [
-          // Camera preview background
           if (isMonitoring)
             _CameraPreview()
           else
             _IdleBackground(),
-
-          // Status overlay
           Column(
             children: [
               const Spacer(),
