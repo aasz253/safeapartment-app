@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "2767604632",
+    "project_id": "applica-8990f",
+    "storage_bucket": "applica-8990f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2767604632:android:7d2661dea2e3d65a0d79ed",
+        "android_client_info": {
+          "package_name": "com.safeapartment.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFgGc1dnP7NYDG1ui_31XeVJCi61SqeCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
