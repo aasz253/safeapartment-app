@@ -1,0 +1,59 @@
+name: safeapartment
+description: Zero-hardware security for your apartment
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  google_fonts: ^6.1.0
+  flutter_svg: ^2.0.7
+  riverpod: ^2.4.9
+  flutter_riverpod: ^2.4.9
+  hive: ^4.0.0
+  hive_flutter: ^4.0.0
+  shared_preferences: ^2.2.2
+  supabase_flutter: ^2.5.0
+  supabase: ^2.5.0
+  http: ^1.1.0
+  camera: ^0.10.5
+  image_picker: ^1.0.4
+  video_player: ^2.8.1
+  record: ^5.0.0
+  audio_waveforms: ^1.0.0
+  path_provider: ^2.1.1
+  sensors_plus: ^4.0.1
+  tflite_flutter: ^0.10.4
+  flutter_local_notifications: ^16.3.0
+  onesignal_flutter: ^5.1.0
+  flutter_webrtc: ^0.9.46
+  webrtc_interface: ^1.1.0
+  purchases_flutter: ^6.10.0
+  permission_handler: ^11.0.1
+  device_info_plus: ^9.1.0
+  connectivity_plus: ^5.0.1
+  url_launcher: ^6.2.1
+  share_plus: ^7.2.1
+  flutter_secure_storage: ^9.0.0
+  cryptography: ^2.7.0
+  intl: ^0.19.0
+  uuid: ^4.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.6
+  hive_generator: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/models/firenet.tflite
+    - assets/sounds/alarm.mp3
+    - assets/sounds/glass_break.mp3
+    - assets/images/logo.png
+    - assets/images/paywall_bg.jpg
