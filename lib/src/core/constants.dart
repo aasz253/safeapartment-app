@@ -3,8 +3,8 @@ class AppConstants {
   static const String appVersion = '1.0.0';
 
   // Supabase
-  static const String supabaseUrl = 'YOUR_SUPABASE_URL';
-  static const String supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+  static const String supabaseUrl = 'https://owmlbpposyjujyblyyrt.supabase.co';
+  static const String supabaseAnonKey = 'sb_publishable_JNUkPNTaBzd5p53uYvNYlg_gDS1pcv4';
 
   // OneSignal
   static const String oneSignalAppId = 'YOUR_ONESIGNAL_APP_ID';
